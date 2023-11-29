@@ -33,7 +33,7 @@ ArvB* arvb_busca(ArvB* a, int c){
 void arvb_imprime(ArvB *a){
  if(!arvb_vazia(a)){
  arvb_imprime(a->esq);
- printf("%d",a->info);
+ printf("\n%d\n",a->info); //mudei para o print sair melhor 
  arvb_imprime(a->dir);
  }
 }
@@ -99,10 +99,11 @@ int hSAD = arv_altura(a->dir);
  return 1+hSAD;
  }
 }
+
 int folhas_primos(ArvB* a){
 	if(!arvb_vazia(a)){
-		int cont= folhas_primos(a->esq);;
-		cont= cont +	folhas_primos(a->dir);;
+		int cont= folhas_primos(a->esq);
+		cont= cont +folhas_primos(a->dir);
 		if (a->info <= 1) {
         	return 0+cont; // não é primo então não é somado
     	}
@@ -117,4 +118,46 @@ int folhas_primos(ArvB* a){
 	else{
 		return 0;
 	}	
+}
+
+int dois_filhos(ArvB* a){
+	if(arvb_vazia(a)){
+		return 0;
+	}
+	else{
+		int nosComDoisFilhos = 0;
+    	if (a->esq != NULL && a->dir != NULL) {
+        	nosComDoisFilhos = 1;
+    	}
+    	int nosEsquerda = dois_filhos(a->esq);
+    	int nosDireita = dois_filhos(a->dir);
+    	return nosComDoisFilhos + nosEsquerda + nosDireita;
+	}
+}
+
+int nos_igual_altura(ArvB* a){
+	if(arvb_vazia(a)){
+		return 0;
+	}
+	int nosComAlturasIguais = 0;
+    if (arv_altura(a->esq) == arv_altura(a->dir)) {
+        nosComAlturasIguais = 1;
+    }
+    int nosEsquerda = nos_igual_altura(a->esq);
+    int nosDireita = nos_igual_altura(a->dir);
+    return nosComAlturasIguais + nosEsquerda + nosDireita;
+}
+
+int iguais(ArvB* a, ArvB* b){
+	if (a == NULL && b == NULL) {
+		return 1;
+    }
+    if (a == NULL || b == NULL) {
+        return 0;
+    }
+    if (a->info != b->info) {
+        return 0;
+    }
+    int subarvoresIguais = iguais(a->esq, b->esq) && iguais(a->dir, b->dir);
+    return subarvoresIguais;
 }
