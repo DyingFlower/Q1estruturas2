@@ -1,6 +1,6 @@
 #include "arvb.h"
 
-struct arv{
+ struct arvb{
 	char info;
 	ArvB *esq;
 	ArvB *dir;
@@ -80,7 +80,7 @@ return a;
 }
 
 void arvb_libera(ArvB *a){
- if(!arv_vazia(a)){
+ if(!arvb_vazia(a)){
  arvb_libera(a->esq);
  arvb_libera(a->dir);
  free(a);
@@ -99,7 +99,3 @@ int hSAD = arv_altura(a->dir);
  return 1+hSAD;
  }
 }
-
-
-
-
