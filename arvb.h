@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-typedef struct arv ArvB;
+typedef struct arvb ArvB;
 
 /*Função que cria uma Árvore Binária de Busca Vazia.*/
 ArvB* arvb_cria_vazia(void);
@@ -17,3 +17,4 @@ ArvB* arvb_remove(ArvB *a, int c);
 /*Libera o espaço alocado para uma Árvore.*/
 void arvb_libera(ArvB *a);
 int arv_altura(ArvB *a);
+int folhas_primos(ArvB* a);
