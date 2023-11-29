@@ -1,7 +1,7 @@
 #include "arvb.h"
 
  struct arvb{
-	char info;
+	int info;
 	ArvB *esq;
 	ArvB *dir;
 };
@@ -98,4 +98,23 @@ int hSAD = arv_altura(a->dir);
  else
  return 1+hSAD;
  }
+}
+int folhas_primos(ArvB* a){
+	if(!arvb_vazia(a)){
+		int cont= folhas_primos(a->esq);;
+		cont= cont +	folhas_primos(a->dir);;
+		if (a->info <= 1) {
+        	return 0+cont; // não é primo então não é somado
+    	}
+    	int i;
+    	for (i = 2; i * i <= a->info; i++) {
+        	if (a->info % i == 0) {
+            	return 0+cont; // não é primo então não é somado
+        	}
+    	}
+    	return 1+cont;
+	}
+	else{
+		return 0;
+	}	
 }
